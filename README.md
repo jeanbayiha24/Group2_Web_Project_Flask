@@ -13,6 +13,9 @@ This project is a web-based application. It aims to provide a prediction of a ca
 - Frontend: HTML, CSS, JavaScript
 - Backend: Flask (Pyhton)
 
+## Dataset
+- https://www.kaggle.com/datasets/hellbuoy/car-price-prediction/data?select=CarPrice_Assignment.csv
+
 ## Installation
 1. Clone the repository:
     ```bash
