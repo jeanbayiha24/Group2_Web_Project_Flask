@@ -20,11 +20,11 @@ This project is a web-based application. It aims to provide a prediction of a ca
     ```
 2. Install dependencies:
     ```bash
-    npm install
+    pip install -r requirements.txt
     ```
 3. Start the development server:
     ```bash
-    npm start
+    python3 app.py
     ```
 
 ## Usage
