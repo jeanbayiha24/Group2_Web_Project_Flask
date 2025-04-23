@@ -87,6 +87,31 @@
 
         <div class="d-flex justify-content-center mt-5">
             <div class="card-form shadow" style="max-width: 800px; width: 100%; border-radius: 10px; overflow: hidden;">
+                <h2>Help</h2> 
+                <p>
+                    Here is a brief description of some input features.
+                </p>
+                <p>
+                    <ul>
+                        <li>Symboling : A numeric rating indicating the risk associated with the car's insurance</li>
+                        <li>Aspiration : Type of air induction</li>
+                        <li>Car body : Shape of the vehicle body</li>
+                        <li>Wheel base : Distance between the front and the rear wheels</li>
+                        <li>Curb weight : Weight of the car without occupants or cargo</li>
+                        <li>Engine type : Engine configuration</li>
+                        <li>Fuel system : Type of fuel delivery system</li>
+                        <li>City mpg : Fuel efficiency in the city</li>
+                        <li>High way mpg : Fuel efficiency on the highway</li>
+                    </ul>
+                </p>
+                <p>
+                    <b>Note:</b> The values of the features are set to default values. You can change them according to your car's specifications.
+                </p>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            <div class="card-form shadow" style="max-width: 800px; width: 100%; border-radius: 10px; overflow: hidden;">
                 <div class="form-header text-white text-center py-3">
                     <h2 class="fw-bold mb-0">Let's estimate your car price 🚗</h2>
                 </div>
@@ -124,7 +149,7 @@
                         <tr>
                             <td>Symboling :</td>
                             <td>
-                                <input type="number" name="symboling" class="form-control">
+                                <input type="number" name="symboling" class="form-control" value="1">
                             </td>
                         </tr>
                         <tr>
@@ -189,31 +214,31 @@
                         <tr>
                             <td>Wheel base (in inches, 1 inch=2.54 cm):</td>
                             <td>
-                                <input type="number" name="wheelbase" step="any" class="form-control">
+                                <input type="number" name="wheelbase" step="any" class="form-control" value="101">
                             </td>
                         </tr>
                         <tr>
                             <td>Car length (in inches, 1 inch=2.54 cm):</td>
                             <td>
-                                <input type="number" name="carlength" step="any" class="form-control">
+                                <input type="number" name="carlength" step="any" class="form-control" value="170">
                             </td>
                         </tr>
                         <tr>
                             <td>Car width (in inches, 1 inch=2.54 cm):</td>
                             <td>
-                                <input type="number" name="carwidth" step="any" class="form-control">
+                                <input type="number" name="carwidth" step="any" class="form-control" value="66">
                             </td>
                         </tr>
                         <tr>
                             <td>Car height (in inches, 1 inch=2.54 cm):</td>
                             <td>
-                                <input type="number" name="carheight" step="any" class="form-control">
+                                <input type="number" name="carheight" step="any" class="form-control" value="54">
                             </td>
                         </tr>
                         <tr>
                             <td>Curb weight (in livres, 1lb=0.45kg):</td>
                             <td>
-                                <input type="number" name="curbweight" placeholder="Poids a vide" class="form-control">
+                                <input type="number" name="curbweight" placeholder="Poids a vide" class="form-control" value="2400">
                             </td>
                         </tr>
                         <tr>
@@ -247,7 +272,7 @@
                         <tr>
                             <td>Engine size (cm<sup>3</sup>):</td>
                             <td>
-                                <input type="number" name="enginesize" class="form-control" >
+                                <input type="number" name="enginesize" class="form-control" value="165">
                             </td>
                         </tr>
                         <tr>
@@ -268,43 +293,43 @@
                         <tr>
                             <td>Bore ratio :</td>
                             <td>
-                                <input type="number" name="boreratio" step="any" class="form-control">
+                                <input type="number" name="boreratio" step="any" class="form-control" value="3.1">
                             </td>
                         </tr>
                         <tr>
                             <td>Stroke (in inches, 1 inch=2.54 cm):</td>
                             <td>
-                                <input type="number" name="stroke" step="any" class="form-control">
+                                <input type="number" name="stroke" step="any" class="form-control" value="3.2">
                             </td>
                         </tr>
                         <tr>
                             <td>Compression ratio :</td>
                             <td>
-                                <input type="number" name="compressionratio" step="any" class="form-control">
+                                <input type="number" name="compressionratio" step="any" class="form-control" value="9.0">
                             </td>
                         </tr>
                         <tr>
                             <td>Horse power (in hp, 1hp=1.01ch):</td>
                             <td>
-                                <input type="number" name="horsepower" class="form-control">
+                                <input type="number" name="horsepower" class="form-control" value="112">
                             </td>
                         </tr>
                         <tr>
                             <td>Peak rpm (in rpm = tr/min):</td>
                             <td>
-                                <input type="number" name="peakrpm" step="any" class="form-control">
+                                <input type="number" name="peakrpm" step="any" class="form-control" value="5000">
                             </td>
                         </tr>
                         <tr>
                             <td>City mpg (in mpg = L/100km):</td>
                             <td>
-                                <input type="number" name="citympg" step="any" class="form-control">
+                                <input type="number" name="citympg" step="any" class="form-control" value="23">
                             </td>
                         </tr>
                         <tr>
                             <td>High way mpg (in mpg = L/100km):</td>
                             <td> 
-                                <input type="number" name="highwaympg" step="any" class="form-control">
+                                <input type="number" name="highwaympg" step="any" class="form-control" value="29">
                             </td>
                         </tr>
                         
@@ -329,4 +354,5 @@
         
     </body>
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    
 </html> 
