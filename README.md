@@ -29,6 +29,7 @@ This project is a web-based application. It aims to provide a prediction of a ca
     ```bash
     python3 app.py
     ```
+4. This web app is deploy on Render at this url: https://group2-web-project-flask.onrender.com
 
 ## Usage
 - Open your browser and navigate to `http://localhost:5000` to access the application.
