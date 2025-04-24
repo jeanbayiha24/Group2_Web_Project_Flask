@@ -76,6 +76,21 @@
                 color: white;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
+            .carousel img{
+                height: 150px;
+                width: auto;
+                object-fit: contain;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .carousel-item {
+                transition: transform 0.8s ease-in-out;
+            }
+            .carousel-control-prev-icon, .carousel-control-next-icon {
+                background-color: rgba(0, 0, 0, 0.6);
+                border-radius: 50%;
+                padding: 15px;
+                }
         </style>
     </head>
     <body>
@@ -87,16 +102,50 @@
                 <a href="{{ url_for('logout') }}" class="btn btn-danger">Sign out</a>
             </div>
         </header>
-        <br><br>
-
-       
-        <p class="lead text-center mb-4">
-            <b>This website developped using Flask API can help you to predict the price of your car from its features.</b>
-        </p>
+        <br>
+        <div id="carouselVoitures" class="carousel slide" data-bs-ride="carousel" >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                  <img src="{{ url_for('static', filename='images/car1.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car2.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car3.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car7.jpeg') }}" class="carousel-img">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                  <img src="{{ url_for('static', filename='images/car4.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car5.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car6.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car8.jpeg') }}" class="carousel-img">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                  <img src="{{ url_for('static', filename='images/car9.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car10.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car11.jpeg') }}" class="carousel-img">
+                  <img src="{{ url_for('static', filename='images/car12.jpeg') }}" class="carousel-img">
+                </div>
+              </div>
+            </div>
+          
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselVoitures" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselVoitures" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
        
 
         <div class="d-flex justify-content-center mt-5">
             <div class="card-form shadow" style="max-width: 800px; width: 100%; border-radius: 10px; overflow: hidden;">
+                <p class="lead text-center mb-4">
+                    <b>This website developped using Flask API can help you to predict the price of your car from its features.</b>
+                </p>
+                
                 <h2>Help</h2> 
                 <p>
                     Here is a brief description of some input features.
