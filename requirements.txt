@@ -4,6 +4,4 @@ numpy
 joblib
 pandas
 gunicorn
-sqlite3
-os
 app
