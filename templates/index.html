@@ -71,13 +71,23 @@
                 font-size: 1.25rem;
                 font-weight: 700;
             }
-
+            header {
+                background: linear-gradient(to right, #1d3557, #457b9d);
+                color: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
         </style>
     </head>
     <body>
-        <div class="btn-signout">
-            <a href="{{ url_for('logout') }}" class="btn btn-danger">Sign out</a>
-        </div>
+        <header class="navbar navbar-expand-lg navbar-dark bg-primary px-4 py-3 shadow">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <h1 class="navbar-brand mb-0">🚗 Car Price Predictor | Hello, <strong>{{ username }}</strong>!</h1>
+            </div>
+            <div class="btn-signout">
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">Sign out</a>
+            </div>
+        </header>
+        
 
         <h1 class="text-center mt-4">Car price prediction</h1>
         <p class="lead text-center mb-4">
