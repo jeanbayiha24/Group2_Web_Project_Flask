@@ -111,6 +111,7 @@ def index():
 
     prediction = None
     car_data = None
+    username = session.get('username')
     
     if request.method == 'POST':
         try:
@@ -167,7 +168,7 @@ def index():
         except Exception as e:
             return render_template('index.html', error=str(e))
     
-    return render_template('index.html')
+    return render_template('index.html', username=username)
 
 
 @app.route('/logout')
