@@ -187,6 +187,7 @@ def home_page():
     username = session.get('username')
     return render_template('home.html', username=username)                           
 
+    
 def generate_statistics():
     # Chargement du dataset d'origine
     df = pd.read_csv('CarPrice_Assignment.csv')
