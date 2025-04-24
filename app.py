@@ -98,7 +98,7 @@ def login():
         if user:
             session['logged_in'] = True
             session['username'] = username
-            return redirect(url_for('index'))
+            return redirect(url_for('home_page'))
         else:
             error = "Incorrect credentials."
 
