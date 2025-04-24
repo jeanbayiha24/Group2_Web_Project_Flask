@@ -2,6 +2,8 @@ from flask import Flask, request, render_template, redirect, url_for, session
 from joblib import load
 import numpy as np
 import pandas as pd
+import sqlite3
+
 
 # Lod the model
 model = load('elastic_poly_model.joblib')
@@ -10,8 +12,71 @@ app = Flask(__name__)
 app.secret_key = 'Very secret' #To secure the sessions
 
 # default id
-USERNAME = "client"
-PASSWORD = "1234"
+#USERNAME = "client"
+#PASSWORD = "1234"
+
+# Initialize the database
+def init_db():
+    with sqlite3.connect('database.db') as conn:
+        c = conn.cursor()
+        c.execute('''CREATE TABLE IF NOT EXISTS car (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            symboling INT,
+            fueltype TEXT,
+            aspiration TEXT,
+            doornumber TEXT,
+            carbody TEXT,
+            drivewheel TEXT,
+            enginelocation TEXT,
+            wheelbase FLOAT,
+            carlength FLOAT,
+            carwidth FLOAT,
+            carheight FLOAT,
+            curbweight INT,
+            enginetype TEXT,
+            cylindernumber TEXT,
+            enginesize INT,
+            fuelsystem TEXT,
+            boreratio FLOAT,
+            stroke FLOAT,
+            compressionratio FLOAT,
+            horsepower INT,
+            peakrpm TEXT,
+            citympg TEXT,
+            highwaympg TEXT,
+            CarBrand TEXT,
+            prediction FLOAT
+        )''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE,
+            password TEXT
+        )''')
+        conn.commit()
+
+# Run DB init at app startup
+init_db()
+
+# Signup
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        with sqlite3.connect('database.db') as conn:
+            c = conn.cursor()
+            try:
+                c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+                conn.commit()
+                return redirect(url_for('login'))
+            except sqlite3.IntegrityError:
+                error = "Username already exists."
+    
+    return render_template('signup.html', error=error)
 
 
 @app.route('/')
@@ -24,11 +89,18 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == USERNAME and password == PASSWORD:
+        with sqlite3.connect('database.db') as conn:
+            c = conn.cursor()
+            c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+            user = c.fetchone()
+
+        if user:
             session['logged_in'] = True
+            session['username'] = username
             return redirect(url_for('index'))
         else:
-            error = "Invalid credentials."
+            error = "Incorrect credentials."
+
     return render_template('login.html', error=error)
 
 
@@ -37,6 +109,9 @@ def index():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
 
+    prediction = None
+    car_data = None
+    
     if request.method == 'POST':
         try:
             # Retrieve the form data
@@ -73,7 +148,20 @@ def index():
             # Prediction
             prediction = model.predict(input_df)[0]
             prediction = round(prediction, 2)
+            car_features['prediction'] = prediction
 
+            with sqlite3.connect('database.db') as conn:
+                c = conn.cursor()
+                c.execute('''INSERT INTO car (
+                    symboling, fueltype, aspiration, doornumber, carbody, drivewheel, enginelocation,
+                    wheelbase, carlength, carwidth, carheight, curbweight, enginetype, cylindernumber,
+                    enginesize, fuelsystem, boreratio, stroke, compressionratio, horsepower, peakrpm,
+                    citympg, highwaympg, CarBrand, prediction
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                    (*car_features.values(),))
+                conn.commit()
+
+            
             return render_template('index.html', prediction=prediction)
         
         except Exception as e:
