@@ -3,7 +3,8 @@ from joblib import load
 import numpy as np
 import pandas as pd
 import sqlite3
-
+import matplotlib.pyplot as plt
+import os
 
 # Lod the model
 model = load('elastic_poly_model.joblib')
@@ -180,7 +181,48 @@ def about():
     username = session.get('username')
     return render_template('about.html', username=username)
 
-                             
+@app.route('/home')
+def home_page(): 
+    generate_statistics()
+    username = session.get('username')
+    return render_template('home.html', username=username)                           
+
+def generate_statistics():
+    # Chargement du dataset d'origine
+    df = pd.read_csv('CarPrice_Assignment.csv')
+
+    os.makedirs("static/plots", exist_ok=True)
+
+    # Top 10 marques les plus fréquentes
+    top_brands = df['CarName'].value_counts().head(10)
+    plt.figure(figsize=(10,5))
+    top_brands.plot(kind='bar', color='skyblue')
+    plt.title("Top 10 des marques de voiture")
+    plt.ylabel("Nombre d'entrées")
+    plt.tight_layout()
+    plt.savefig("static/plots/top10_brands.png")
+    plt.close()
+
+    # Prix moyen par marque
+    mean_prices = df.groupby('CarName')['price'].mean().sort_values(ascending=False).head(10)
+    plt.figure(figsize=(10,5))
+    mean_prices.plot(kind='bar', color='orange')
+    plt.title("Prix moyen par marque (Top 10)")
+    plt.ylabel("Prix moyen ($)")
+    plt.tight_layout()
+    plt.savefig("static/plots/mean_price_per_brand.png")
+    plt.close()
+
+    # Pie chart du type de carburant
+    fuel_counts = df['fueltype'].value_counts()
+    plt.figure(figsize=(6,6))
+    plt.pie(fuel_counts, labels=fuel_counts.index, autopct='%1.1f%%', startangle=140, colors=['#66b3ff','#ff9999','#99ff99','#ffcc99'])
+    plt.title("Répartition des types de carburant")
+    plt.axis('equal')
+    plt.tight_layout()
+    plt.savefig("static/plots/fueltype_pie.png")
+    plt.close()
+
 
 @app.route('/logout')
 def logout():
