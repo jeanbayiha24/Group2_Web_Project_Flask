@@ -170,6 +170,17 @@ def index():
     
     return render_template('index.html', username=username)
 
+@app.route('/help')
+def help():
+    username = session.get('username')
+    return render_template('help.html', username=username)
+
+@app.route('/about')
+def about():
+    username = session.get('username')
+    return render_template('about.html', username=username)
+
+                             
 
 @app.route('/logout')
 def logout():
