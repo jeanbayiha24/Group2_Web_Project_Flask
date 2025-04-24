@@ -4,7 +4,7 @@
 This project is a web-based application. It aims to provide a prediction of a car price using Polynomial regression.
 
 ## Features
-- User authentication with default credentials (username=client, password=1234).
+- User authentication.
 - Car price prediction using Scikit learn regularized polynomial regression.
 - Responsive design for mobile and desktop using Bootstrap.
 - Flask web API.
