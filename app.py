@@ -173,16 +173,22 @@ def index():
 
 @app.route('/help')
 def help():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     username = session.get('username')
     return render_template('help.html', username=username)
 
 @app.route('/about')
 def about():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     username = session.get('username')
     return render_template('about.html', username=username)
 
 @app.route('/home')
 def home_page(): 
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     generate_statistics()
     username = session.get('username')
     return render_template('home.html', username=username)                           
